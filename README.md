@@ -1,2 +1,13 @@
-# my-notes
-Personal notes on all CS related topics.
+# Programming
+
+### Frontend
+
+### Backend
+
+### Databases
+
+### Tools
+
+### Architecture
+
+
