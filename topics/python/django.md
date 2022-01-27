@@ -139,3 +139,83 @@ When making a production site, we may want to use a more scaleable database like
 > If you are not using SQLite as your database, additional settings such as USER, PASSWORD, and HOST must be added. For more details, see the reference documentation for DATABASES.
 
 [good reference for database basics](https://docs.djangoproject.com/en/4.0/intro/tutorial02/)
+
+## Forms
+
+**GET** - returns the submitted data as a string, along with the data keys and values in the URL.
+
+GET is unsuitable for password forms because of the above information
+
+GET is mostly used for web search forms because this is obviously public information. (Your searching it)
+
+**POST** - used to make a change in the database
+
+### How does django get involved with form validation?
+
+We know that django is a very battery included framework.
+
+This is essential to bring up when we are talking about form validation.
+
+Django handles three main parts
+
+-   Prepares and restructures the data to make it ready for rendering
+
+-   Automatically creates HTML forms for data entry
+
+-   Recieves and processes submitted client side forms
+
+**NOTE**: Everyone can write this code but it would take a lot of effort and time. Django gives you this functionality off the bat.
+
+### How does the django form class work
+
+A django form class attributes map to HTML `<input>`
+
+**NOTE**: It would be redundant to create form attributes to create an object in the database, if that database object already has defined fields.
+
+In this case we can just set
+
+`model='YOUR-MODEL'`
+
+We set that in the `Meta` class of our parent form class.
+
+Everything outside the `Meta` class is what is not inherited from your database model.
+
+**Example**:
+
+```
+class registerUserForm(UserCreationForm):
+    email = forms.EmailField(required = True)
+
+    class Meta:
+        model = User
+        field = ("username", "email", "password1", "password2")
+
+    def save(self, commit=True):
+        user = super(registerUserForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user
+```
+
+'
+
+## Templates
+
+```
+Placed in <PROJECT>/<APP>/templates/<APP>/template.html for app-specific templates to help with making the app reusable elsewhere.
+
+For general "global" templates I put them in <PROJECT>/templates/template.html
+```
+
+### How do we reference the base template in project directory from app templates?
+
+```
+You can tell Django to look in PROJECT_ROOT/some_app/templates by editing the settings.py file - for example: 'DIRS': [os.path.join(BASE_DIR, "templates")]
+```
+
+and then in your app templates folder...
+
+```
+{% extends 'base.html' %}
+```
