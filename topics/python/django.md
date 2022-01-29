@@ -198,7 +198,28 @@ class registerUserForm(UserCreationForm):
         return user
 ```
 
-'
+Attempting to understand `super(registerUserForm,self)`
+
+> The super() call creates a super object. It finds the next class after B in self.**class**.**mro**. Attributes accessed on the super object are searched on the next class and returned. Descriptors are resolved. When using super() the first parameter should always be the same as the class in which it is being used
+
+This calls the next class in our MRO or `registerUserForm`
+
+[MRO](https://stackoverflow.com/questions/7141820/use-of-python-super-function-in-django-model) - is the method resolution order
+
+**NOTE**: We are not necessarily calling the parent class but just following the MRO.
+
+Just remember we are not calling our save class, we are calling some other class's save class.
+
+### AN important note on how form classes are utilized
+
+> So when we handle a model instance in a view, we typically retrieve it from the database. When we’re dealing with a form we typically instantiate it in the view.
+> When we instantiate a form, we can opt to leave it empty or pre-populate it, for example with:
+>
+> -   data from a saved model instance (as in the case of admin forms for editing)
+> -   data that we have collated from other sources
+> -   data received from a previous HTML form submission
+
+So by using a created django form we are basically creating an instance of our database model and if the POST data is valid then we choose to save that instance.
 
 ## Templates
 
