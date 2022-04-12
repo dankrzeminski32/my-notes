@@ -211,3 +211,5 @@ A teacher teaches student, both people
 Ex: University needs to record which teachers taught which subjects in which degree paths.
 
 Here is a really good article about these relationships... -> [Binary, Unary, and Ternary Relationships](https://www.vertabelo.com/blog/n-ary-relationship-types/)
+
+## Creating Database Models
