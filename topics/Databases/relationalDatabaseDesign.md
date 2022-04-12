@@ -28,7 +28,7 @@ A good database design means that when end users run queries against the databas
 
 **Attribute** - Property that describes an entity's characteristic ex: Name, phone number, hire date
 
-**Relation** - Two-dimensional table that contains tuples and columns, just a **table** that contains relationships
+**Relation** - Two-dimensional table that contains tuples and columns, just a **table** that contains relationships (Naming convention: Make table names **plural**)
 
 > Man who created relational databases was a mathemetician so when you see the formulas behind database design the **R** in the formulas is for relation (table)
 
@@ -124,3 +124,90 @@ We avoid these by using **Data normalization**!
     - Fourth Normal form (4NF)
     - Fifth Normal Form (5NF)
     - Sixth Normal Form (6NF)
+
+## Database Design
+
+#### Statement of purpose
+
+**Statement of Purpose/Problem** - Why am I creating the database? Set database up to support the valuable queries (whether thats for you or the enduser)
+
+**Example:** Management of a dog obedience school would like to keep track of the scheduled classes, the trainers assigned to the classes, the dogs registered for the classes, and the owners of the dogs.
+
+**List out the nouns:** Scheduled classes, trainers, classes, dogs, owners
+
+**Example:** Bob wants to keep track of his music collection. He wants to track the albums he owns, the recording artist, and be able to rate the tracks(include ratings).
+
+**List out the nouns:** Albums, recording artist, ratings, tracks
+
+#### What is Scope Creep?
+
+A term used in project management that relates to the changes in a projects scope without any control procedure like a change request. These changes can affect the projects budget, projects structure, and projects schedule.
+
+Why do I mention this? -> A statement of purpose really helps with preventing this as you can present to the stakeholder their original thought process and plan. Anything new that they may want to add is now **additional work** beyond the original scope (statement of purpose)
+
+#### Starting to design the database
+
+-   Take all the nouns from your statement of purpose and write them down.
+-   Eliminate duplicates and create table drawings (squares w/titles) of these on excel or paper
+
+Now we have our tables listed, we must figure out the attributes/columns
+
+**Next step,**
+
+Think about all of the possible data attributes that your enduser would want to track.
+
+Think about the web forms or paper forms that you will have people filling out whose data will end up in the database.
+
+After completing this list, review it with the enduser
+
+> Calculated fields are a controversial topic in the argument of database design best practices. Conclusion is that it really depends on the data that you are dealing with. Calculated fields are subject to change and inaccuracies more than regular fields.
+
+**Next step,**
+
+Now that you have all your attributes and table names listed, you must identify your primary and foreign keys.
+
+-   All tables must have a primary key
+-   No duplicates
+
+You have three options,
+
+1.) Identify a column that is unique for every entry in the database
+2.) Create a ID column to act as your primary key
+2.) Identify 2 or more columns that can work as a composite key.
+
+It is really just a **design decision**
+
+**After you choose your primary keys,**
+
+Identify your indices and columns that are going to be frequently queried.
+
+**Note:** Primary keys are already considered indices.
+
+You can also identify your indices later down the road, but it is good to have a few initial indices in mind.
+
+#### What is database schema?
+
+A database schema is the logical representation of the database, it is the structure and framework of our database. Determines how elements are related to each other and how the data is organized. The schema does not contain any data in it, IT IS JUST A FRAMEWORK/STRUCTURE FOR DB
+
+#### Relationship Matrix
+
+This is a diagram you can use in order to visualize the relationships between your database tables.
+
+Here is a really good article going into the grits of this visualization method -> [Relationship Matrix](https://sqldatabasetutorials.com/sql-db/matrix-diagrams/)
+
+#### Binary, Unary, and Ternary Relationships
+
+**Binary** - When two entities participate, this is the most common relationship
+
+Ex: **Teacher** teaches **Subject**
+
+**Unary** - When both participants in the relationship are the same entity
+
+Ex: **Person** is in relationship to another **Person** entity
+A teacher teaches student, both people
+
+**Ternary** - Any relationship between two or more entities.
+
+Ex: University needs to record which teachers taught which subjects in which degree paths.
+
+Here is a really good article about these relationships... -> [Binary, Unary, and Ternary Relationships](https://www.vertabelo.com/blog/n-ary-relationship-types/)
