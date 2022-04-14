@@ -231,6 +231,7 @@ State relationships in plain english...
 0 means that it is optional to N (many)
 
 Check out **Crows foot Notation** for cardinality and modality
+[Crows foot notation](https://vertabelo.com/blog/crow-s-foot-notation/)
 
 Check out **Relational Model Diagram**
 
