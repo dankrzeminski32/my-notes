@@ -213,3 +213,35 @@ Ex: University needs to record which teachers taught which subjects in which deg
 Here is a really good article about these relationships... -> [Binary, Unary, and Ternary Relationships](https://www.vertabelo.com/blog/n-ary-relationship-types/)
 
 ## Creating Database Models
+
+### ER Diagrams
+
+> There are plenty of different ways to do ER Diagrams and it is up to you to find your preference...
+
+Entities are represented by boxes or rectangles that include name of the table, primary key, and any key entities.
+
+Add relationships as diamonds and include the relating verb in the diamond.
+
+**After sketching the tables and basic relationships,**
+
+State relationships in plain english...
+
+**Ex:** A trainer can train many Scheduled Classes (0:N)
+
+0 means that it is optional to N (many)
+
+Check out **Crows foot Notation** for cardinality and modality
+
+Check out **Relational Model Diagram**
+
+#### How to fix a many-to-many?
+
+Create a new table and combine the two existing table names to create that tables name
+
+Take the primary key from both existing tables and put it into the new table, and then cancel out the old relationship.
+
+Create a new relationship to the new table you just created between both of the old tables.
+
+**Previous:** <Owners> --> <Dogs>
+
+**New:** <Owners> --> <OwnersDogs> --> <Dogs>
