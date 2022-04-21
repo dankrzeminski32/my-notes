@@ -214,7 +214,7 @@ Here is a really good article about these relationships... -> [Binary, Unary, an
 
 ## Creating Database Models
 
-### ER Diagrams
+#### ER Diagrams
 
 > There are plenty of different ways to do ER Diagrams and it is up to you to find your preference...
 
@@ -243,6 +243,11 @@ Take the primary key from both existing tables and put it into the new table, an
 
 Create a new relationship to the new table you just created between both of the old tables.
 
-**Previous:** <Owners> --> <Dogs>
+**Previous:** Owners --> Dogs
 
-**New:** <Owners> --> <OwnersDogs> --> <Dogs>
+**New:** Owners --> OwnersDogs --> Dogs
+
+## Data Integrity
+
+#### Entity Integrity
+
