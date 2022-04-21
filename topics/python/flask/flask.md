@@ -1,5 +1,21 @@
 # Python Flask
 
+## Flask Environment variables
+
+avoid the inconvenience and stay consistent
+
+so instead of using
+
+```
+export FLASK_APP=demo
+```
+
+we will just throw all of our necessary environment variables in a `.env` file
+
+#### are environment variables specific to your venv?
+
+They only exist for that process block
+
 -   REST API must return JSON Serializable data
 
 ## REST API Response Codes
@@ -26,5 +42,37 @@ db.drop_all() #Deletes all existing tables
 db.create_all() #Creates new databases
 ```
 
+#### How to update or add flask models w/sqlalchemy
 
+We need a migration tool
 
+```
+pip install flask-migrate
+```
+
+then if it is the first time initializing the database,
+
+```
+flask db init
+```
+
+If not and you just need to update an existing table then 
+
+```
+flask db migrate
+```
+and 
+
+```
+flask db upgrade
+```
+
+But if you need to add a new table you created,
+
+**NOTE:** Make sure you have the model imported in the same file as this code: 
+
+```
+db.create_all()
+```
+
+That is just a method for creating all new databases with your SQLAlchemy object
