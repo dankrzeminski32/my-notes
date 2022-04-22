@@ -230,3 +230,182 @@ WHERE name='David' AND choice='Red'
 ```
 
 _Note that name and choice are representing two columns in a database_
+
+#### ORDER BY
+
+Sort rows based on a column value
+
+can be sorted numerically or alphabetically
+
+syntax
+
+```
+SELECT column_1, column_2
+FROM table
+ORDER BY column_1 ASC/DESC
+```
+
+`ORDER BY` comes after selection and happens at the bottom of the query. It is the last thing SQL does.
+
+If you leave the `ASC/DESC` part blank, then it defaults to `ASC`
+
+You can use `ORDER BY` on multiple columns.
+
+It will order by your first entry first and then take all of those ordered rows and order them by your second column entry.
+
+#### LIMIT
+
+Allows us to limit the number of rows returned for a query
+
+Similar to `head()` in R or Python
+
+Allows you to get a good grasp and preview of your returned data.
+
+Also becomes very useful when paired with ORDER BY
+
+**Goes at the very end of a query, last command to be executed**
+
+syntax,
+
+```
+SELECT * FROM payment
+ORDER BY payment_date DESC
+LIMIT 10;
+```
+
+A SQL query like that could help us answer a helpful business question like, what are the 10 most recent payments we have had?
+
+#### BETWEEN
+
+Used to match a value against a range of values
+
+-   value `BETWEEN` low `AND` high
+
+Using the `BETWEEN` operator is equal to using the >= **and** <= operators (it is inclusive).
+
+You can also combine `BETWEEN` and the `NOT` operator to get `NOT BETWEEN`
+
+This is the same as saying < low `OR` value > high
+value `NOT BETWEEN` low `AND` high
+
+We are **exclusive** of the actual low and high statements when using `NOT BETWEEN` unlike the regular expression
+
+the `BETWEEN` operator can be used on dates. You need to format the dates in the **ISO 8601** standard format, which is `YYYY-MM-DD`
+
+```
+date BETWEEN '2007-01-01' AND '2007-02-01'
+```
+
+**NOTE:** datetime starts at 0:00, so pay close attention to inclusive and exclusive datetime queries
+
+#### IN
+
+Whenever you want to check if a value appears in some dataset
+
+For example,
+
+If you want to check if the name _adam_ appears `in` some first_name column or users table.
+
+syntax,
+
+```
+value IN(option1,option2, .... option_n)
+```
+
+examples,
+
+```
+SELECT color FROM table
+WHERE color IN('red','blue')
+```
+
+Can be used with the `NOT` operator
+
+```
+SELECT color FROM table
+WHERE color NOT IN('red','blue')
+```
+
+#### LIKE and ILIKE
+
+We have already found solutions for queries where we need direct matches like first_name='john'
+
+but what about certain situations where we need to query for a general pattern? Such as, emails ending in '@gmail.com' pr all names that begin with 'A'?
+
+The `LIKE` operator allows us to permorm pattern matching against string data with the use of **wildcard** characters
+
+What are **wildcard** characters?
+
+1.) the **%** percent symbol, this allows us to match **any sequence of characters**
+2.) the **\_** underscore symbol, matches any **single** character
+
+examples,
+
+All names that begin with an 'A'
+
+```
+WHERE name LIKE 'A%'
+```
+
+Any string that starts with A and then has any sequence after that
+
+All names that end with an 'a'
+
+```
+WHERE name LIKE '%a'
+```
+
+**NOTE:** `LIKE` is case-sensitive, we can use ILIKE which is case-insensitive.
+
+using the underscore allows us to replace a single character
+
+example,
+
+image we want to get all mission impossible films
+
+```
+WHERE title LIKE 'Mission Impossible _'
+```
+
+this would give back mission impossible 1, mission impossible 2, etc...
+
+You can use multiple underscoresm, which then leaves two character spots open,
+
+We can combine pattern matching operators to create more complex patterns
+
+```
+WHERE name LIKE '_her%'
+ - Cheryl
+ - Theresa
+ - Sherri
+
+Has to be one character before 'her' but can have as many as you want after 'her'
+
+**NOTE:** Keep in mind that PostgreSQL does support full regex capabilities.
+
+
+good example,
+
+```
+
+SELECT \* FROM customer
+WHERE first_name LIKE 'A%' AND last_name NOT LIKE 'B%'
+ORDER BY last_name
+
+```
+
+All customers where first name starts with an 'A' and last name does not start with 'B'
+
+```
+
+How to check if a given word is in the column entries?
+
+```
+SELECT COUNT(*)
+FROM film
+WHERE title LIKE '%Truman%'
+```
+
+This returns all the films with the word Truman in them.
+
+## GROUP BY Statements
