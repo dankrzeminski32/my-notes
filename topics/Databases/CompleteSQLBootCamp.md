@@ -409,3 +409,46 @@ WHERE title LIKE '%Truman%'
 This returns all the films with the word Truman in them.
 
 ## GROUP BY Statements
+
+#### Aggregate Functions
+
+-   AVG() -> Returns average value
+-   Count() -> Returns number of values
+-   MAX() -> Returns max value
+-   MIN() -> Returns min value
+-   SUM() -> Returns the sum of all values
+
+Aggregate functions happen only in the **SELECT** or **HAVING** clause.
+
+```
+SELECT MAX(replacement_cost) FROM film
+```
+
+Keep in mind that adding another column
+
+```
+SELECT MAX(replacement_cost), title FROM film
+```
+
+**Would not work** because our aggregate function is just returning a single value (in this case, max replacement cost)
+
+#### Group By - Part 1
+
+Allows us to aggregate columns per some category
+
+Need to choose a **categorical** column to perform group by on
+
+Categorical columns are non-continous
+
+![gb1](img/gb1.png)
+
+```
+SELECT category_col, AGG(data_col)
+FROM table
+WHERE condition
+GROUP BY category_col
+```
+
+The **GROUP BY** caluse has to come directly after a **FROM** statement or after a **WHERE** statement
+
+In the **SELECT** statement, columns must either have an aggregate function or be in the **GROUP BY** call
