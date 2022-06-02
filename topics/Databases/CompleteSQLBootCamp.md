@@ -1080,3 +1080,91 @@ CREATE TABLE example(
 ```
 
 **NOTE**: If a record fails to insert and you are using a **SERIAL** data type for your PK, the **SERIAL** data column will still increment. Leading to you having random jumps in your PK column (like 2 to 4, etc...)
+
+## Conditional Expressions and Procedures
+
+Overview
+
+-   CASE
+-   COALESCE
+-   NULLIF
+-   CAST
+-   Views
+-   Import and Export Functionality
+
+These commands allow us to add logic to our queries and workflows
+
+### CASE
+
+We can use this statement to only execute SQL code when certain conditions are met
+
+This is very similar to if/else in other programming languages
+
+There are two main ways to use a **CASE** statement, either a **general CASE** or a **CASE expression**
+
+Both methods can lead to the **same** result
+
+**General CASE syntax,**
+
+```SQL
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ELSE some_other_result
+END
+```
+
+**The result will come back in the form of another column, it will test your row for the condition and then return the result in your CASE column.**
+
+Here is an example,
+
+```SQL
+SELECT a,
+CASE WHEN a = 1 THEN 'one'
+     WHEN a = 2 THEN 'two'
+ELSE 'other'
+END
+FROM test;
+```
+
+This would then add the **CASE** column in your query result. The column by default is called **CASE**
+
+If you wish to change the default name, (add **AS** clause)
+
+```SQL
+SELECT a,
+CASE WHEN a = 1 THEN 'one'
+     WHEN a = 2 THEN 'two'
+ELSE 'other' AS label
+END
+FROM test;
+```
+
+**CASE Expression syntax,**
+
+The CASE Expression will first evaluate an expression then compare the result with each value in the **WHEN** clauses sequentially
+
+This can be confusing because it looks very similar to the **General Case Syntax**
+
+This is generally used to just test for equality, it is much less flexible than the **General CASE**
+
+Here is the **syntax,**
+
+```SQL
+CASE expression
+    WHEN value1 THEN result1
+    WHEN value2 THEN result2
+    ELSE some_other_result
+END
+```
+
+Here is an example using the **CASE Expression syntax,**
+
+```SQL
+SELECT a,
+    CASE a WHEN 1 THEN 'one'
+        WHEN 2 THEN 'two'
+[](CompleteSQLBootCamp.md)        ELSE 'other'
+    END
+FROM test;
+```
